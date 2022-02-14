@@ -210,6 +210,8 @@ class Trainer():
             self.scheduler(self.optimizer, i, epoch, self.best_pred)
             self.optimizer.zero_grad()
             outputs = self.model(image)
+            print(outputs[0].shape)
+            print(target.shape)
             loss = self.criterion(outputs, target)
             loss.backward()
             self.optimizer.step()

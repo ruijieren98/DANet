@@ -197,10 +197,11 @@ class SyncBatchNorm(_BatchNorm):
                                      extra, self.sync, self.training, self.momentum, self.eps,
                                      self.activation, self.slope).view(input_shape)
         else:
-            return syncbatchnorm(x, self.weight, self.bias, self.running_mean, self.running_var,
+            x, _, _ = syncbatchnorm(x, self.weight, self.bias, self.running_mean, self.running_var,
                                  extra, self.sync, self.training, self.momentum, self.eps,
-                                 self.activation, self.slope).view(input_shape)
-
+                                 self.activation, self.slope)
+            x = x.view(input_shape)
+            return x
     def extra_repr(self):
         if self.activation == 'none':
             return 'sync={}'.format(self.sync)

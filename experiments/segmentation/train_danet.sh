@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --dataset citys --model  danet --backbone resnet101 --checkname danet101  --base-size 1024 --crop-size 768 --epochs 240 --batch-size 2 --lr 0.003 --workers 2 --multi-grid --multi-dilation 4 8 16

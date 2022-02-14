@@ -20,7 +20,7 @@ from .base import BaseDataset
 class CitySegmentation(BaseDataset):
     NUM_CLASS = 19
     BASE_DIR = 'cityscapes'
-    def __init__(self, root=os.path.expanduser('../../datasets'), split='train',
+    def __init__(self, root=os.path.expanduser('/content/vision_datasets'), split='train',
                  mode=None, transform=None, target_transform=None, **kwargs):
         super(CitySegmentation, self).__init__(
             root, split, mode, transform, target_transform, **kwargs)
@@ -91,13 +91,13 @@ def get_city_pairs(folder, split='train'):
                     print('cannot find the mask:', maskpath)
         return img_paths, mask_paths
     if split == 'train':
-        split_f = os.path.join(folder, 'train_fine.txt')
+        split_f = os.path.join(folder, 'cityscapes_train_list.txt')
         img_paths, mask_paths = get_path_pairs(folder, split_f)
     elif split == 'val':
-        split_f = os.path.join(folder, 'val_fine.txt')
+        split_f = os.path.join(folder, 'cityscapes_val_list.txt')
         img_paths, mask_paths = get_path_pairs(folder, split_f)
     elif split == 'test':
-        split_f = os.path.join(folder, 'test.txt')
+        split_f = os.path.join(folder, 'cityscapes_test_list.txt')
         img_paths, mask_paths = get_path_pairs(folder, split_f)
     else:
         split_f = os.path.join(folder, 'trainval_fine.txt')

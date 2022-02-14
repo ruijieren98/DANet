@@ -99,12 +99,13 @@ class syncbatchnorm_(Function):
             y = lib.cpu.batchnorm_forward(x, _ex, _exs, gamma, beta, ctx.eps)
 
         # Output
-        ctx.save_for_backward(x, _ex, _exs, gamma, beta)
-        return y
+        ctx.save_for_backward(x,_ex,_exs,gamma,beta)
+        ctx.mark_non_differentiable(running_mean,running_var)
+        return y,running_mean,running_var
 
     @staticmethod
     @once_differentiable
-    def backward(ctx, dz):
+    def backward(ctx,dz,_druning_mean,_druning_var):
         x, _ex, _exs, gamma, beta = ctx.saved_tensors
         dz = dz.contiguous()
 
